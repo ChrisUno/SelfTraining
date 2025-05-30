@@ -1,0 +1,8 @@
+name: training workflow
+run-name: Github actions first hand training
+on: [push]
+jobs:
+  straight-forward-learning:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "
