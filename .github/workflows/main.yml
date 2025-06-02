@@ -5,4 +5,5 @@ jobs:
   straight-forward-learning:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "
+      - run: echo "were just training the workflow"
+      
