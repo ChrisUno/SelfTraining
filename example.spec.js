@@ -1,6 +1,8 @@
 // Example Playwright test
 const { test, expect } = require('@playwright/test');
 
+test.use({ headless: false, slowMo: 100 });
+
 test('basic test', async ({ page }) => {
   await page.goto('https://playwright.dev/');
   const title = await page.title();
