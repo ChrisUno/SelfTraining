@@ -5,6 +5,7 @@ jobs:
   straight-forward-learning:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - run: echo "were just training the workflow"
       
       - name: Install dependencies
@@ -16,3 +17,6 @@ jobs:
       - name: Test
         run: npm test
       
+=======
+      - run: echo "
+>>>>>>> aafc7b847f8b506c073bc86a3420a8dcb241d32e
