@@ -1,22 +1,24 @@
-name: training workflow
-run-name: Github actions first hand training
-on: [push]
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
-  straight-forward-learning:
+  test:
     runs-on: ubuntu-latest
     steps:
-<<<<<<< HEAD
-      - run: echo "were just training the workflow"
-      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
       - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm test
-      
-=======
-      - run: echo "
->>>>>>> aafc7b847f8b506c073bc86a3420a8dcb241d32e
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
