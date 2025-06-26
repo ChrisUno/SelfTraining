@@ -23,8 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install
-      - name: Install Playwright Dependencies
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Playwright tests and save output
+        run: npx playwright test | tee playwright-log.txt
+      - name: Upload Playwright log
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-log
+          path: playwright-log.txt
