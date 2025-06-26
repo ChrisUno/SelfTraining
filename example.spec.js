@@ -37,4 +37,36 @@ test('testing the currys page', async ({ page }) => {
   await page.waitForSelector('[data-testid="product-title"]', { timeout: 15000 });
   const productTitle = await page.$eval('[data-testid="product-title"]', el => el.textContent.trim());
   expect(productTitle).toBeTruthy();
+
+  // Add item to basket
+  const addToBasketButton = await page.$('button[data-testid="add-to-basket-button"]');
+  expect(addToBasketButton).not.toBeNull();
+  await addToBasketButton.click();
+
+  // Wait for the basket confirmation
+  await page.waitForSelector('[data-testid="basket-confirmation"]', { timeout: 15000 });
+  const basketConfirmation = await page.$('[data-testid="basket-confirmation"]');
+  expect(basketConfirmation).not.toBeNull();  
+
+  // click on basket icon
+  const basketIcon = await page.$('[data-testid="basket-icon"]');
+  expect(basketIcon).not.toBeNull();
+  await basketIcon.click(); 
+
+  // Wait for the basket page to load
+  await page.waitForSelector('[data-testid="basket-page"]', { timeout: 15000 });
+  const basketPage = await page.$('[data-testid="basket-page"]');
+  expect(basketPage).not.toBeNull();  
+
+  // Verify the product is in the basket
+  const basketProductTitle = await page.$eval('[data-testid="basket-product-title"]', el => el.textContent.trim());
+  expect(basketProductTitle).toBe(productTitle);  
+
+  // enter town to check for free delivery
+  const deliveryTownInput = await page.$('input[data-testid="delivery-town-input"]');
+  expect(deliveryTownInput).not.toBeNull();
+  await deliveryTownInput.fill('Carrickfergus');
+  await page.keyboard.press('Enter');
+
+  
 });
